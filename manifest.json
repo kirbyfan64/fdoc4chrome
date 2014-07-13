@@ -1,0 +1,16 @@
+{
+    "name": "fdoc4chrome",
+    "version": "0.1",
+    "description": "View fdoc files from Google Chrome",
+    "manifest_version": 2,
+    "permissions": ["tabs"],
+    "content_scripts": [
+        {
+            "matches": ["*://*/*.fdoc", "file://*/*.fdoc"],
+            "js": ["fdoc.js"]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "icon.png"
+    }
+}
