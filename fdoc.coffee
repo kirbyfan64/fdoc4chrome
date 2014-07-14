@@ -20,6 +20,7 @@ convertToHTML = (data) ->
           line
       else if startsWith line, '@title '
         title = splitFirst line
+        continue
       else if startsWith line, '@h'
         id = line.charAt '2'
         data = splitFirst line
