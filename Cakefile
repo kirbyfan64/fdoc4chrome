@@ -13,7 +13,8 @@ run = (cmd) ->
     print data.toString()
 
 task 'icon', 'generate the icon', ->
-  run 'convert -fill red -font Arial-Regular -transparent white label:f4c icon.png'
+  for n in [16, 48, 128]
+    run "convert -size #{n}x#{n} -fill red -font Arial-Regular -transparent white label:f4c icon#{n}.png"
 
 task 'build', 'build fdoc4chrome', ->
   # generate icon
