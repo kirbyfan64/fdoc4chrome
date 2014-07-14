@@ -6,8 +6,8 @@ convertToHTML = (data) ->
     data = data.slice data.indexOf('>')+1
   # Substitute literal strings
   for lit in data.match(/\{.*\}/g) ? []
-    lit = lit.slice(1, lit.length-1) # cut out braces
-    data = data.replace url, "<code>#{lit}</code>"
+    res = "<code>#{lit.slice(1, lit.length-1)}</code>" # cut out braces
+    data = data.replace lit, res
   block = false
   title = document.title
   res = for line in data.replace(/\n/gm, '<br>').split '<br>'
