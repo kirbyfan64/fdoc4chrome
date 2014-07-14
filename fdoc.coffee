@@ -12,6 +12,8 @@ unescape = (s) ->
     res = res.replace (new RegExp "&#{value};", 'g'), repl
   return res
 
+codeBlock = ['code', 'felix', 'felix-unchecked', 'c++', 'pre']
+
 convertToHTML = (data) ->
   if startsWith data, '<pre'
     data = data.slice data.indexOf('>')+1
@@ -37,7 +39,7 @@ convertToHTML = (data) ->
         id = line.charAt '2'
         data = splitFirst line
         "<h#{id}>#{data}</h#{id}>"
-      else if ['code', 'felix', 'c++', 'pre'].indexOf(line.slice 1) != -1
+      else if codeBlock.indexOf(line.slice 1) != -1
         block = true
         '<code>'
       else
