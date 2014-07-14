@@ -23,8 +23,22 @@ Installation
 
 Now, viewing fdoc files in Chrome renders them as HTML.
 
+Updating
+********
+
+Run::
+   
+   cake build
+
+again to update the JavaScript file.
+
+Then:
+
+- Go to `chrome://extensions`
+- Under `fdoc4chrome`, click `Reload extension`
+
 Todo:
 *****
 
 - Add syntax highlighting
-- Upload .crx file
+- Upload .crx file and add to Chrome web store
