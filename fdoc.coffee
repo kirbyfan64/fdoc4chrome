@@ -1,9 +1,21 @@
 startsWith = (a, b) -> a.slice(0, b.length) is b
 splitFirst = (str, sep = ' ') -> str.slice str.indexOf(sep)+1
 
+escapeMap =
+  lt: '<'
+  gt: '>'
+  quot: '"'
+
+unescape = (s) ->
+  res = s.replace /&amp;/g, "&"
+  for value, repl of escapeMap
+    res = res.replace (new RegExp "&#{value};", 'g'), repl
+  return res
+
 convertToHTML = (data) ->
   if startsWith data, '<pre'
     data = data.slice data.indexOf('>')+1
+  data = unescape data
   # Substitute literal strings
   for lit in data.match(/\{.*\}/g) ? []
     res = "<code>#{lit.slice(1, lit.length-1)}</code>" # cut out braces
