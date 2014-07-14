@@ -2,6 +2,7 @@
 {spawn} = require 'child_process'
 
 run = (cmd) ->
+  print "#{cmd}\n"
   cmdl = cmd.split ' '
   prog = cmdl[0]
   argl = cmdl.slice(1)
