@@ -24,7 +24,7 @@ convertToHTML = (data) ->
         id = line.charAt '2'
         data = splitFirst line
         "<h#{id}>#{data}</h#{id}>"
-      else if ["code", "felix", "c++"].indexOf line.slice 1
+      else if ['code', 'felix', 'c++', 'pre'].indexOf line.slice 1
         block = true
         "<code>"
       else
