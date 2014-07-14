@@ -19,7 +19,7 @@ convertToHTML = (data) ->
     data = data.slice data.indexOf('>')+1
   data = unescape data
   # Substitute literal strings
-  for lit in data.match(/\{.*\}/g) ? []
+  for lit in data.match(/\{.*?\}/g) ? []
     res = "<code>#{lit.slice(1, lit.length-1)}</code>" # cut out braces
     data = data.replace lit, res
   block = false
