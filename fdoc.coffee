@@ -45,7 +45,7 @@ convertToHTML = (data) ->
       else
         continue # ignore the error
     else
-      line
+      line.replace /( )/g, '&nbsp;'
   return [title, res.join '<br>']
 
 [document.title, document.body.innerHTML] = convertToHTML document.body.innerHTML
