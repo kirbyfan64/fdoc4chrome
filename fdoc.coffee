@@ -1,4 +1,5 @@
 startsWith = (a, b) -> a.slice(0, b.length) is b
+splitFirst = (str, sep = ' ') -> str.slice str.indexOf(sep)+1
 
 convertToHTML = (data) ->
   if startsWith data, '<pre'
@@ -18,10 +19,10 @@ convertToHTML = (data) ->
         else
           line
       else if startsWith line, '@title '
-        title = line.split(' ', 1)[1]
+        title = splitFirst line
       else if startsWith line, '@h'
         id = line.charAt '2'
-        data = line.split(' ', 2)[1]
+        data = splitFirst line
         "<h#{id}>#{data}</h#{id}>"
       else if ["code", "felix", "c++"].indexOf line.slice 1
         block = true
