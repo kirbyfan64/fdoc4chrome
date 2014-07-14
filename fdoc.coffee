@@ -15,7 +15,7 @@ convertToHTML = (data) ->
       if block
         if line is '@'
           block = false
-          "</code>"
+          '</code>'
         else
           line
       else if startsWith line, '@title '
@@ -27,7 +27,7 @@ convertToHTML = (data) ->
         "<h#{id}>#{data}</h#{id}>"
       else if ['code', 'felix', 'c++', 'pre'].indexOf line.slice 1
         block = true
-        "<code>"
+        '<code>'
       else
         continue # ignore the error
     else
