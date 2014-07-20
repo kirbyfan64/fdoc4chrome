@@ -12,10 +12,19 @@ run = (cmd) ->
   pipe.stdout.on 'data', (data) ->
     print data.toString()
 
+coffee = (x) ->
+  run "coffee -c #{x}.coffee"
+
 task 'icon', 'generate the icon', ->
   for n in [16, 48, 128]
     run "convert -size #{n}x#{n} -fill red -font Arial-Regular -transparent white label:f4c icon#{n}.png"
 
+task 'build:fdoc', 'build fdoc4chrome core script', ->
+  coffee 'fdoc'
+
+task 'build:popup', 'build the popup script', ->
+  coffee 'popup'
+
 task 'build', 'build fdoc4chrome', ->
-  # generate icon
-  run 'coffee -c fdoc.coffee'
+  invoke 'build:fdoc'
+  invoke 'build:popup'

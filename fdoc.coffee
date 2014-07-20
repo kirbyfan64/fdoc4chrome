@@ -51,4 +51,11 @@ convertToHTML = (data) ->
         line
   return [title, res.join '<br>']
 
-[document.title, document.body.innerHTML] = convertToHTML document.body.innerHTML
+doc = document
+
+chrome.storage.local.get {enabled: true}, (x) ->
+  if x.enabled
+    [doc.title,doc.body.innerHTML] = convertToHTML doc.body.innerHTML
+
+#if enabled
+#  [document.title,document.body.innerHTML] = convertToHTML document.body.innerHTML
