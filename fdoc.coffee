@@ -29,7 +29,9 @@ convertToHTML = (data) ->
       if block
         if line is '@'
           block = false
-          '</code>'
+          '</code></div>'
+        else if line is '@expect'
+          '</code></div><br><br><div class="expect"><code>'
         else
           line
       else if startsWith line, '@title '
@@ -41,7 +43,7 @@ convertToHTML = (data) ->
         "<h#{id}>#{data}</h#{id}>"
       else if codeBlock.indexOf(line.slice 1) != -1
         block = true
-        '<code>'
+        '<div><code>'
       else
         continue # ignore the error
     else
@@ -53,9 +55,17 @@ convertToHTML = (data) ->
 
 doc = document
 
+# add CSS
+style = doc.createElement 'style'
+style.type = 'text/css'
+style.innerHTML = '''
+div.expect {
+  background-color: yellow;
+  width: 100%;
+}
+'''
+doc.getElementsByTagName('head')[0].appendChild style
+
 chrome.storage.local.get {enabled: true}, (x) ->
   if x.enabled
     [doc.title,doc.body.innerHTML] = convertToHTML doc.body.innerHTML
-
-#if enabled
-#  [document.title,document.body.innerHTML] = convertToHTML document.body.innerHTML
