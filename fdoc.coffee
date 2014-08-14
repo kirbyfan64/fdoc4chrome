@@ -54,6 +54,7 @@ convertToHTML = (data) ->
   return [title, res.join '<br>']
 
 doc = document
+head = doc.getElementsByTagName('head')[0]
 
 # add CSS
 style = doc.createElement 'style'
@@ -64,7 +65,24 @@ div.expect {
   width: 100%;
 }
 '''
-doc.getElementsByTagName('head')[0].appendChild style
+head.appendChild style
+
+# load MathJax
+scripts = [doc.createElement('script'), doc.createElement 'script']
+scripts[0].type = 'text/x-mathjax-config'
+# Taken from Felix's fdoc2html
+scripts[0].text = '
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ["script", "noscript", "style", "textarea"]
+  }
+})
+'
+scripts[1].type = 'text/javascript'
+scripts[1].src =\
+  'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+for script in scripts
+  head.appendChild script
 
 chrome.storage.local.get {enabled: true}, (x) ->
   if x.enabled
